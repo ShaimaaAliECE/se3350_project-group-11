@@ -1,0 +1,48 @@
+body {
+    background: beige;
+    margin: 15px;
+    margin-top: 50px;
+}
+
+.MainPage {
+    display: inline-block;
+    line-height: normal;
+    white-space: nowrap;
+    vertical-align: middle;
+    text-align: center;
+    cursor: pointer;
+    -webkit-user-drag: none;
+    user-select: none;
+    box-sizing: border-box;
+}
+
+.MainPage {
+    font-family: inherit;
+    font-size: 100%;
+    padding: 0.5em 1em;
+    color: rgba(0, 0, 0, 0.8);
+    border: none rgba(0, 0, 0, 0);
+    background-color: rgb(37, 184, 49);
+    text-decoration: none;
+    border-radius: 5px;
+    margin: 5px;
+}
+
+.MainPage ::-moz-focus-inner {
+    padding: 0;
+    border: 0;
+}
+
+.MainPage:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+.MainPage:active {
+    background: rgb(27, 161, 94);
+}
+
+html {
+    font-family: sans-serif;
+    text-align: center;
+}
