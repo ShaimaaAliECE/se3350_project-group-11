@@ -161,11 +161,9 @@ function showQuestion(x) {
       var button
       if (x==2 || x==3 || x==5 || x==6){ 
             button = document.getElementById(`btn${split}${z}`)
-            button.addEventListener('click', selectAnswer)
           }
       else { 
             button = document.getElementById(`btn${step}${z}`)
-            button.addEventListener('click', selectAnswer)
           }
       button.innerText = nums[y]
       z++
