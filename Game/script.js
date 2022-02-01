@@ -33,6 +33,7 @@ startButton.addEventListener('click', startGame)
 })*/
 
 function startGame() {
+  alert("How to play: select the correct option. a wrong attempt will turn red")
   step = 1
   resetState()
   startButton.classList.add('hide')
@@ -70,6 +71,7 @@ function fillArray() {
   }
   numbers.push(nums)
   showQuestion(0)
+  alert("Step 1: Split the list of numbers evenly. Click the number below where you want to split")
 }
 
 
@@ -88,6 +90,7 @@ function setNextLevel(x) {
     questionContainerElements[1].classList.remove('hide')
     questionContainerElements[4].classList.remove('hide')
     numbers.push(nums)
+    alert("Step 2: Split the list of numbers as evenly as possible. Click the number below where you want to split")
   }
 
   else if (x == 2){
@@ -109,6 +112,7 @@ function setNextLevel(x) {
     split = 4
     step++
     x++
+    alert("Step 3: Select the numbers in order from smallest to largest")
   }
 
   else if (x == 4){
@@ -117,6 +121,7 @@ function setNextLevel(x) {
       nums.push(numbers[0][i+5])
     }
     numbers.push(nums)
+    alert("Step 4: Split the list of numbers as evenly as possible. Click the number below where you want to split")
   }
 
   else if (x == 5){
@@ -139,12 +144,14 @@ function setNextLevel(x) {
     step++
     correct = 0
     x++
+    alert("Step 5: Select the numbers in order from smallest to largest")
   }
 
   else if (x == 7){
     //Sorts all ten numbers
     sorted = numbers[0].sort(function(a, b){return a - b})
     correct = 0
+    alert("Step 6: Select the numbers in order from smallest to largest")
   }
 
   showQuestion(x)
@@ -184,7 +191,7 @@ function showQuestion(x) {
 
 //Removes click listeners from previous steps
 function resetState() {
-  clearStatusClass(document.body)
+  //clearStatusClass(document.body)
   var y
   if (step ==2||step ==1||step == 8){y = 0}
   if (step ==3){y=1}
@@ -192,11 +199,13 @@ function resetState() {
 
   if (step <4||step==6||step==8){
     Array.from(answerButtonsElements[y].children).forEach(button => {
-      clearStatusClass(button)
+      
       button.removeEventListener('click', selectAnswer)
       if (step >2){ button.innerText = ""}
     })
   }
+
+ 
  
   nextButton.classList.add('hide')
 
@@ -206,19 +215,23 @@ function resetState() {
 function selectAnswer(e) {
   const selectedButton = e.target
   const num = selectedButton.innerText
+  setStatusClass(selectedButton, false)
   
   if (num == numbers[0][5]&&step==1){
-    //setStatusClass(document.body, num)
-    //setStatusClass(selectedButton, num)
+    setStatusClass(selectedButton, true)
     setNextLevel(1)
   }
-  if ((num == numbers[1][2]||num == numbers[1][3])&&step==2){
+  else if ((num == numbers[1][2]||num == numbers[1][3])&&step==2){
+    setStatusClass(selectedButton, true)
+    clearStatusClass(0)
     setNextLevel(2)
   }
 
-  if (step ==4){
+  else if (step ==4){
     const num2 = Array.from(answerButtonsElements[1].children)[correct]
     if (num == sorted[0]){
+      setStatusClass(selectedButton, true)
+      clearStatusClass(1)
       num2.innerText = num
       correct++
       sorted.shift()
@@ -231,13 +244,18 @@ function selectAnswer(e) {
     }
   }
 
-  if ((num == numbers[4][2]||num == numbers[4][3])&&step==5){
+  else if ((num == numbers[4][2]||num == numbers[4][3])&&step==5){
+    setStatusClass(selectedButton, true)
+    clearStatusClass(2)
+    clearStatusClass(3)
     setNextLevel(5)
   }
 
-  if (step ==7){
+  else if (step ==7){
     const num2 = Array.from(answerButtonsElements[4].children)[correct]
     if (num == sorted[0]){
+      setStatusClass(selectedButton, true)
+      clearStatusClass(4)
       num2.innerText = num
       correct++
       sorted.shift()
@@ -251,9 +269,9 @@ function selectAnswer(e) {
   }
 
   if (step > 7){
- 
     const num2 = Array.from(answerButtonsElements[0].children)[correct]
     if (num == sorted[0]){
+      setStatusClass(selectedButton, true)
       num2.innerText = num
       correct++
       sorted.shift()
@@ -262,35 +280,30 @@ function selectAnswer(e) {
     if (sorted.length == 0){
       questionContainerElements[1].classList.add('hide')
       questionContainerElements[4].classList.add('hide')
+      setStatusClass(document.body, true)
+      Array.from(answerButtonsElements[0].children).forEach(button => {
+        setStatusClass(button, true)
+      })
     }
   }
-    /*else{Array.from(answerButtonsElements[0].children).forEach(button => {
-      //setStatusClass(button, button.dataset.num)
-      startButton.innerText = 'Restart'
-      startButton.classList.remove('hide')
-    })}
-    else{
-      Array.from(answerButtonsElements[1].children).forEach(button => {
-      //setStatusClass(button, button.dataset.num)
-      startButton.innerText = 'Restart'
-      startButton.classList.remove('hide')
-    })}*/
-  
   
 }
 
 function setStatusClass(element, correct) {
-  clearStatusClass(element)
+  //clearStatusClass(element)
   if (correct) {
+    element.classList.remove('wrong')
     element.classList.add('correct')
   } else {
     element.classList.add('wrong')
   }
 }
 
-function clearStatusClass(element) {
-  element.classList.remove('correct')
-  element.classList.remove('wrong')
+function clearStatusClass(x) {
+  Array.from(answerButtonsElements[x].children).forEach(button => {
+    button.classList.remove('correct')
+    button.classList.remove('wrong')
+  })
 }
 
 // made some comments 
