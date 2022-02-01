@@ -215,10 +215,130 @@ function resetState() {
 function selectAnswer(e) {
   const selectedButton = e.target
   const num = selectedButton.innerText
-  setStatusClass(selectedButton, false)
-  
-  if (num == numbers[0][5]&&step==1){
-    setStatusClass(selectedButton, true)
+  switch(step){
+    case 1:
+      if (num == numbers[0][5]){
+        correctSelection(selectedButton);
+        setNextLevel(1)
+      }
+      else{
+        wrongSelection(selectedButton);
+      }
+      break;
+
+    case 2:
+      if ((num == numbers[1][2]||num == numbers[1][3])){
+        correctSelection(selectedButton);
+        setNextLevel(2)
+      }
+      else{
+        wrongSelection(selectedButton);
+      }
+      break;
+
+    case 4:
+      const num2 = Array.from(answerButtonsElements[1].children)[correct]
+      if (num == sorted[0]){
+        correctSelection(selectedButton);
+        num2.innerText = num
+        correct++
+        sorted.shift()
+        selectedButton.innerText = ""
+      }
+      else{
+        wrongSelection(selectedButton);
+      }
+      if (sorted.length == 0){
+        questionContainerElements[2].classList.add('hide')
+        questionContainerElements[3].classList.add('hide')
+        setNextLevel(4)
+      }
+      break;
+
+    case 5:
+      if ((num == numbers[4][2]||num == numbers[4][3])){
+        correctSelection(selectedButton);
+        setNextLevel(5)
+      }
+      else{
+        wrongSelection(selectedButton);
+      }
+      break;
+
+    case 7:
+      const num3 = Array.from(answerButtonsElements[4].children)[correct]
+      if (num == sorted[0]){
+        correctSelection(selectedButton);
+        num3.innerText = num
+        correct++
+        sorted.shift()
+        selectedButton.innerText = ""
+      }
+      else{
+        wrongSelection(selectedButton);
+      }
+      if (sorted.length == 0){
+        questionContainerElements[2].classList.add('hide')
+        questionContainerElements[3].classList.add('hide')
+        setNextLevel(7)
+      }
+      break;
+
+    default:// for step 8. or any step after step 7 for now
+      const num4 = Array.from(answerButtonsElements[0].children)[correct]
+      if (num == sorted[0]){
+        correctSelection(selectedButton);
+        num4.innerText = num
+        correct++
+        sorted.shift()
+        selectedButton.innerText = ""
+      }
+      else{
+        wrongSelection(selectedButton);
+      }
+      if (sorted.length == 0){
+        questionContainerElements[1].classList.add('hide')
+        questionContainerElements[4].classList.add('hide')
+        Array.from(answerButtonsElements[0].children).forEach(button => {
+        })
+      }
+  }
+}
+
+function setStatusClass(element, correct) {
+  if (correct) {
+    element.classList.remove('wrong')
+    element.classList.add('correct')
+  } else {
+    element.classList.add('wrong')
+  }
+}
+
+function clearStatusClass(x) {
+  Array.from(answerButtonsElements[x].children).forEach(button => {
+    button.classList.remove('correct')
+    button.classList.remove('wrong')
+  })
+}
+
+function correctSelection(selectedButton){
+  selectedButton.classList.add('correct');
+  window.setTimeout(function(){selectedButton.classList.remove('correct')},100);
+}
+
+function wrongSelection(selectedButton){
+  selectedButton.classList.add('wrong');
+      window.setTimeout(function(){selectedButton.classList.remove('wrong')},100);
+}
+
+// made some comments 
+
+
+
+
+/*
+if (num == numbers[0][5]&&step==1){
+    //setStatusClass(selectedButton, true)
     setNextLevel(1)
   }
   else if ((num == numbers[1][2]||num == numbers[1][3])&&step==2){
@@ -286,24 +406,4 @@ function selectAnswer(e) {
       })
     }
   }
-  
-}
-
-function setStatusClass(element, correct) {
-  //clearStatusClass(element)
-  if (correct) {
-    element.classList.remove('wrong')
-    element.classList.add('correct')
-  } else {
-    element.classList.add('wrong')
-  }
-}
-
-function clearStatusClass(x) {
-  Array.from(answerButtonsElements[x].children).forEach(button => {
-    button.classList.remove('correct')
-    button.classList.remove('wrong')
-  })
-}
-
-// made some comments 
+ */
