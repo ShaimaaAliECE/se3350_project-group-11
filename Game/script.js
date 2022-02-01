@@ -295,4 +295,4 @@ function clearStatusClass(element) {
   element.classList.remove('wrong')
 }
 
-// made some comments !
+// made some comments 
