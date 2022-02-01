@@ -300,6 +300,8 @@ function selectAnswer(e) {
         questionContainerElements[1].classList.add('hide')
         questionContainerElements[4].classList.add('hide')
         Array.from(answerButtonsElements[0].children).forEach(button => {
+          setStatusClass(button, true);
+          setStatusClass(document.body,true);
         })
       }
   }
