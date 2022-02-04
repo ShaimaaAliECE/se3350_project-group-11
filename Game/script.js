@@ -26,6 +26,8 @@ var split
 //Just a variable to be incremented for the sorting step
 var correct = 0
 
+const correctAudio = document.getElementById('correct-audio');
+const wrongAudio = document.getElementById('wrong-audio');
 
 startButton.addEventListener('click', startGame)
 /*nextButton.addEventListener('click', () => {
@@ -326,11 +328,15 @@ function clearStatusClass(x) {
 function correctSelection(selectedButton){
   selectedButton.classList.add('correct');
   window.setTimeout(function(){selectedButton.classList.remove('correct')},100);
+  correctAudio.play();
+
 }
 
 function wrongSelection(selectedButton){
   selectedButton.classList.add('wrong');
-      window.setTimeout(function(){selectedButton.classList.remove('wrong')},100);
+  window.setTimeout(function(){selectedButton.classList.remove('wrong')},100);
+  wrongAudio.play();
+
 }
 
 // made some comments 
