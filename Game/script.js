@@ -26,6 +26,8 @@ var split
 //Just a variable to be incremented for the sorting step
 var correct = 0
 
+const correctAudio = document.getElementById('correct-audio');
+const wrongAudio = document.getElementById('wrong-audio');
 
 startButton.addEventListener('click', startGame)
 /*nextButton.addEventListener('click', () => {
@@ -168,11 +170,9 @@ function showQuestion(x) {
       var button
       if (x==2 || x==3 || x==5 || x==6){ 
             button = document.getElementById(`btn${split}${z}`)
-            button.addEventListener('click', selectAnswer)
           }
       else { 
             button = document.getElementById(`btn${step}${z}`)
-            button.addEventListener('click', selectAnswer)
           }
       button.innerText = nums[y]
       z++
@@ -217,82 +217,99 @@ function resetState() {
 function selectAnswer(e) {
   const selectedButton = e.target
   const num = selectedButton.innerText
-  setStatusClass(selectedButton, false)
-  
-  if (num == numbers[0][5]&&step==1){
-    setStatusClass(selectedButton, true)
-    setNextLevel(1)
-  }
-  else if ((num == numbers[1][2]||num == numbers[1][3])&&step==2){
-    setStatusClass(selectedButton, true)
-    clearStatusClass(0)
-    setNextLevel(2)
-  }
+  switch(step){
+    case 1:
+      if (num == numbers[0][5]){
+        correctSelection(selectedButton);
+        setNextLevel(1)
+      }
+      else{
+        wrongSelection(selectedButton);
+      }
+      break;
 
-  else if (step ==4){
-    const num2 = Array.from(answerButtonsElements[1].children)[correct]
-    if (num == sorted[0]){
-      setStatusClass(selectedButton, true)
-      clearStatusClass(1)
-      num2.innerText = num
-      correct++
-      sorted.shift()
-      selectedButton.innerText = ""
-    }
-    if (sorted.length == 0){
-      questionContainerElements[2].classList.add('hide')
-      questionContainerElements[3].classList.add('hide')
-      setNextLevel(4)
-    }
-  }
+    case 2:
+      if ((num == numbers[1][2]||num == numbers[1][3])){
+        correctSelection(selectedButton);
+        setNextLevel(2)
+      }
+      else{
+        wrongSelection(selectedButton);
+      }
+      break;
 
-  else if ((num == numbers[4][2]||num == numbers[4][3])&&step==5){
-    setStatusClass(selectedButton, true)
-    clearStatusClass(2)
-    clearStatusClass(3)
-    setNextLevel(5)
-  }
+    case 4:
+      const num2 = Array.from(answerButtonsElements[1].children)[correct]
+      if (num == sorted[0]){
+        correctSelection(selectedButton);
+        num2.innerText = num
+        correct++
+        sorted.shift()
+        selectedButton.innerText = ""
+      }
+      else{
+        wrongSelection(selectedButton);
+      }
+      if (sorted.length == 0){
+        questionContainerElements[2].classList.add('hide')
+        questionContainerElements[3].classList.add('hide')
+        setNextLevel(4)
+      }
+      break;
 
-  else if (step ==7){
-    const num2 = Array.from(answerButtonsElements[4].children)[correct]
-    if (num == sorted[0]){
-      setStatusClass(selectedButton, true)
-      clearStatusClass(4)
-      num2.innerText = num
-      correct++
-      sorted.shift()
-      selectedButton.innerText = ""
-    }
-    if (sorted.length == 0){
-      questionContainerElements[2].classList.add('hide')
-      questionContainerElements[3].classList.add('hide')
-      setNextLevel(7)
-    }
-  }
+    case 5:
+      if ((num == numbers[4][2]||num == numbers[4][3])){
+        correctSelection(selectedButton);
+        setNextLevel(5)
+      }
+      else{
+        wrongSelection(selectedButton);
+      }
+      break;
 
-  if (step > 7){
-    const num2 = Array.from(answerButtonsElements[0].children)[correct]
-    if (num == sorted[0]){
-      setStatusClass(selectedButton, true)
-      num2.innerText = num
-      correct++
-      sorted.shift()
-      selectedButton.innerText = ""
-    }
-    if (sorted.length == 0){
-      questionContainerElements[1].classList.add('hide')
-      questionContainerElements[4].classList.add('hide')
-      setStatusClass(document.body, true)
-      Array.from(answerButtonsElements[0].children).forEach(button => {
-        setStatusClass(button, true)
-      })
-    }
+    case 7:
+      const num3 = Array.from(answerButtonsElements[4].children)[correct]
+      if (num == sorted[0]){
+        correctSelection(selectedButton);
+        num3.innerText = num
+        correct++
+        sorted.shift()
+        selectedButton.innerText = ""
+      }
+      else{
+        wrongSelection(selectedButton);
+      }
+      if (sorted.length == 0){
+        questionContainerElements[2].classList.add('hide')
+        questionContainerElements[3].classList.add('hide')
+        setNextLevel(7)
+      }
+      break;
+
+    default:// for step 8. or any step after step 7 for now
+      const num4 = Array.from(answerButtonsElements[0].children)[correct]
+      if (num == sorted[0]){
+        correctSelection(selectedButton);
+        num4.innerText = num
+        correct++
+        sorted.shift()
+        selectedButton.innerText = ""
+      }
+      else{
+        wrongSelection(selectedButton);
+      }
+      if (sorted.length == 0){
+        questionContainerElements[1].classList.add('hide')
+        questionContainerElements[4].classList.add('hide')
+        Array.from(answerButtonsElements[0].children).forEach(button => {
+          setStatusClass(button, true);
+          setStatusClass(document.body,true);
+        })
+      }
   }
-  
 }
 
 function setStatusClass(element, correct) {
-  //clearStatusClass(element)
   if (correct) {
     element.classList.remove('wrong')
     element.classList.add('correct')
@@ -308,4 +325,18 @@ function clearStatusClass(x) {
   })
 }
 
-// made some comments !
+function correctSelection(selectedButton){
+  selectedButton.classList.add('correct');
+  window.setTimeout(function(){selectedButton.classList.remove('correct')},100);
+  //correctAudio.play();
+
+}
+
+function wrongSelection(selectedButton){
+  selectedButton.classList.add('wrong');
+  window.setTimeout(function(){selectedButton.classList.remove('wrong')},100);
+  wrongAudio.play();
+
+}
+
+// made some comments 
