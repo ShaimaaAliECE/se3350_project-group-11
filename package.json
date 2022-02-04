@@ -1,7 +1,7 @@
 {
   "name": "3350",
   "version": "1.0.0",
-  "description": "",
+  "description": "se3350_project-group-11 created by GitHub Classroom",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -10,5 +10,14 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.2"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ShaimaaAliECE/se3350_project-group-11.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ShaimaaAliECE/se3350_project-group-11/issues"
+  },
+  "homepage": "https://github.com/ShaimaaAliECE/se3350_project-group-11#readme"
 }

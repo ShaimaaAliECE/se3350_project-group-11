@@ -24,4 +24,14 @@ app.get("/setting", (req, res) => {
     res.redirect("Setting.html");
 });
 
+app.get("/level1", (req, res) => {
+    res.redirect("LevelOne.html");
+});
+app.get("/level2", (req, res) => {
+    res.redirect("LevelTwo.html");
+});
+app.get("/level3", (req, res) => {
+    res.redirect("LevelThree.html");
+});
+
 app.listen(80);
