@@ -328,7 +328,7 @@ function clearStatusClass(x) {
 function correctSelection(selectedButton){
   selectedButton.classList.add('correct');
   window.setTimeout(function(){selectedButton.classList.remove('correct')},100);
-  correctAudio.play();
+  //correctAudio.play();
 
 }
 
