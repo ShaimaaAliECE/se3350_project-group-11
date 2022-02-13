@@ -108,10 +108,16 @@ body.wrong {
 }
 
 .instruction-container button{
+  position: relative;
+  top: 10px;
   font-size: 2rem;
   background-color: white;
   border: 1px solid black;
   border-radius: 5px;
   padding: .25em .5em;
   cursor: pointer;
+  /* top: 5px;
+  bottom: 5px;
+  left: 5px;
+  right: 5px; */
 }

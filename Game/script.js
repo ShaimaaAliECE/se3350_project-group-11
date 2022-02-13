@@ -86,7 +86,7 @@ function fillArray() {
   }
   numbers.push(nums)
   showQuestion(0)
-  showInstruction("Step 1: Split the list of numbers evenly. Click the number below where you want to split");
+  showInstruction("Step 1: Split the list of numbers evenly. Click the number where you want to split");
   //alert("Step 1: Split the list of numbers evenly. Click the number below where you want to split")
 }
 
@@ -106,7 +106,7 @@ function setNextLevel(x) {
     questionContainerElements[1].classList.remove('hide')
     questionContainerElements[4].classList.remove('hide')
     numbers.push(nums)
-    showInstruction("Step 2: Split the list of numbers as evenly as possible. Click the number below where you want to split");
+    showInstruction("Step 2: Split the list of numbers as evenly as possible. Click the number where you want to split");
     //alert("Step 2: Split the list of numbers as evenly as possible. Click the number below where you want to split")
   }
 
@@ -139,7 +139,7 @@ function setNextLevel(x) {
       nums.push(numbers[0][i+5])
     }
     numbers.push(nums)
-    showInstruction("Step 4: Split the list of numbers as evenly as possible. Click the number below where you want to split");
+    showInstruction("Step 4: Split the list of numbers as evenly as possible. Click the number where you want to split");
     //alert("Step 4: Split the list of numbers as evenly as possible. Click the number below where you want to split")
   }
 
@@ -355,6 +355,7 @@ function wrongSelection(selectedButton){
   selectedButton.classList.add('wrong');
   window.setTimeout(function(){selectedButton.classList.remove('wrong')},100);
   wrongAudio.play();
+  showInstruction("Wrong! Please Try Again");
 
 }
 
