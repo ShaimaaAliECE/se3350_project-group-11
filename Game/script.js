@@ -46,6 +46,8 @@ startButton.addEventListener('click', startGame)
   setNextLevel()
 })*/
 
+showInstruction("How to play: select the correct option. a wrong attempt will turn red")
+
 function startGame() {
   showInstruction("How to play: select the correct option. a wrong attempt will turn red")
   //alert("How to play: select the correct option. a wrong attempt will turn red")
