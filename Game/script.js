@@ -325,6 +325,7 @@ function selectAnswer(e) {
         Array.from(answerButtonsElements[0].children).forEach(button => {
           setStatusClass(button, true);
           setStatusClass(document.body,true);
+          showInstruction("Awsome! Great Job")
         })
       }
   }
