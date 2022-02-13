@@ -83,3 +83,35 @@ body.wrong {
 .hide {
   display: none;
 }
+
+.instruction-container{
+  display: none;
+  position: fixed;
+  border-radius: 10px;
+  width: 600px;
+  height: 600px;
+  padding: 10px;
+  /* top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0; */
+  background-color: rgba(0, 0, 0, .9);
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 2rem;
+  flex-direction: column;
+}
+
+.instruction-container.show{
+  display: flex;
+}
+
+.instruction-container button{
+  font-size: 2rem;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: .25em .5em;
+  cursor: pointer;
+}

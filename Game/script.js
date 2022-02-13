@@ -29,13 +29,26 @@ var correct = 0
 const correctAudio = document.getElementById('correct-audio');
 const wrongAudio = document.getElementById('wrong-audio');
 
+var instructionContainerElement = document.getElementById('instructionContainer');
+var instructionElementText = document.querySelector('[data-instruction-message-text]');
+var okButton = document.getElementById('ok-button');
+
+
+
+okButton.addEventListener('click',function() {
+  instructionContainerElement.classList.remove('show');
+});
+
+
+
 startButton.addEventListener('click', startGame)
 /*nextButton.addEventListener('click', () => {
   setNextLevel()
 })*/
 
 function startGame() {
-  alert("How to play: select the correct option. a wrong attempt will turn red")
+  showInstruction("How to play: select the correct option. a wrong attempt will turn red")
+  //alert("How to play: select the correct option. a wrong attempt will turn red")
   step = 1
   resetState()
   startButton.classList.add('hide')
@@ -73,7 +86,8 @@ function fillArray() {
   }
   numbers.push(nums)
   showQuestion(0)
-  alert("Step 1: Split the list of numbers evenly. Click the number below where you want to split")
+  showInstruction("Step 1: Split the list of numbers evenly. Click the number below where you want to split");
+  //alert("Step 1: Split the list of numbers evenly. Click the number below where you want to split")
 }
 
 
@@ -92,7 +106,8 @@ function setNextLevel(x) {
     questionContainerElements[1].classList.remove('hide')
     questionContainerElements[4].classList.remove('hide')
     numbers.push(nums)
-    alert("Step 2: Split the list of numbers as evenly as possible. Click the number below where you want to split")
+    showInstruction("Step 2: Split the list of numbers as evenly as possible. Click the number below where you want to split");
+    //alert("Step 2: Split the list of numbers as evenly as possible. Click the number below where you want to split")
   }
 
   else if (x == 2){
@@ -114,7 +129,8 @@ function setNextLevel(x) {
     split = 4
     step++
     x++
-    alert("Step 3: Select the numbers in order from smallest to largest")
+    showInstruction("Step 3: Select the numbers in order from smallest to largest");
+    //alert("Step 3: Select the numbers in order from smallest to largest")
   }
 
   else if (x == 4){
@@ -123,7 +139,8 @@ function setNextLevel(x) {
       nums.push(numbers[0][i+5])
     }
     numbers.push(nums)
-    alert("Step 4: Split the list of numbers as evenly as possible. Click the number below where you want to split")
+    showInstruction("Step 4: Split the list of numbers as evenly as possible. Click the number below where you want to split");
+    //alert("Step 4: Split the list of numbers as evenly as possible. Click the number below where you want to split")
   }
 
   else if (x == 5){
@@ -146,14 +163,16 @@ function setNextLevel(x) {
     step++
     correct = 0
     x++
-    alert("Step 5: Select the numbers in order from smallest to largest")
+    showInstruction("Step 5: Select the numbers in order from smallest to largest");
+    //alert("Step 5: Select the numbers in order from smallest to largest")
   }
 
   else if (x == 7){
     //Sorts all ten numbers
     sorted = numbers[0].sort(function(a, b){return a - b})
     correct = 0
-    alert("Step 6: Select the numbers in order from smallest to largest")
+    showInstruction("Step 6: Select the numbers in order from smallest to largest");
+    //alert("Step 6: Select the numbers in order from smallest to largest")
   }
 
   showQuestion(x)
@@ -338,5 +357,15 @@ function wrongSelection(selectedButton){
   wrongAudio.play();
 
 }
+
+//displays the instructions to be shown to the user 
+function showInstruction(instructions)
+{
+  instructionContainerElement.classList.add('show');
+  instructionElementText.innerText = instructions;
+
+}
+
+
 
 // made some comments 
