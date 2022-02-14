@@ -1,9 +1,43 @@
 
 
+let timeSecond = 30;
+const timeH = document.querySelector("h1");
+
+displayTime(timeSecond);
+
+const countDown = setInterval(() => {
+  timeSecond--;
+  displayTime(timeSecond);
+  if (timeSecond == 0 || timeSecond < 1) {
+    endCount();
+    clearInterval(countDown);
+  }
+}, 1000);
+
+function displayTime(second) {
+  const min = Math.floor(second / 60);
+  const sec = Math.floor(second % 60);
+  timeH.innerHTML = `
+  ${min < 10 ? "0" : ""}${min}:${sec < 10 ? "0" : ""}${sec}
+  `;
+}
+
+function endCount() {
+  timeH.innerHTML = "Time out";
+  document.body.className = "timeOut";
+  setTimeout(function () {
+
+    window.location.reload();
+  
+    }, 4000);
+  
+}
+
 //Start button/restart button
 const startButton = document.getElementById('start-btn')
 //Button for advancing after getting step complete. Not used currently
 const nextButton = document.getElementById('next-btn')
+
 
 
 var questionContainerElements = [document.getElementById('question-container'),  document.getElementById('question-container2'), document.getElementById('question-container3'),  document.getElementById('question-container4'),document.getElementById('question-container5'), document.getElementById('question-container6') ]
@@ -44,6 +78,7 @@ function startGame() {
   //Clears the array if it is a restart
   for(x=0; x<7;x++){
     numbers.pop()
+    
   }
   
   fillArray()
@@ -299,6 +334,7 @@ function selectAnswer(e) {
         wrongSelection(selectedButton);
       }
       if (sorted.length == 0){
+        clearInterval(countDown);
         questionContainerElements[1].classList.add('hide')
         questionContainerElements[4].classList.add('hide')
         Array.from(answerButtonsElements[0].children).forEach(button => {
