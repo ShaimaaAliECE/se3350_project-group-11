@@ -32,6 +32,7 @@ var numWrongAttempts = 0;
 const correctAudio = document.getElementById('correct-audio');
 const wrongAudio = document.getElementById('wrong-audio');
 const winningAudio = document.getElementById('winning-audio');
+const gameoverAudio = document.getElementById('gameover-audio');
 
 var instructionContainerElement = document.getElementById('instructionContainer');
 var instructionElementText = document.querySelector('[data-instruction-message-text]');
@@ -406,7 +407,7 @@ function gameEndingMessage()
 
 function gameOver()
 {
-  console.log("3 Wrong attemps made ");
+  gameoverAudio.play();
   showGameEnding("3 Wrong selections \n Game Over !");
   restartButton.addEventListener('click',() => {
     restartContainerElement.classList.remove('show');
