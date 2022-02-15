@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Login</title>
+		<link rel="stylesheet" type="text/css" href="login.css" />
+	</head>
+	<body onclick="audioPlay()">
+		<p class="icon-txt" id="openSet">SetUp</p>
+		<div class="login-box">
+			<div class="main-login">
+				<h3 class="box-title">Login Account</h3>
+				<div class="input-box">
+					<p class="i-t">Account</p>
+					<input id="playinput" type="text" placeholder="account" />
+				</div>
+				<div class="input-box">
+					<p class="i-t">Password</p>
+					<input type="text" placeholder="password" />
+				</div>
+				<div class="but-box">
+					<button type="button" onclick="Login()">Login</button>
+				</div>
+				<!-- register -->
+				<div class="registered">
+					<a href="registered.html">Registered</a>
+				</div>
+			</div>
+		</div>
+		<!-- setting -->
+		<div class="setting-box">
+			<div class="popup-main">
+				<div class="setting">
+					<div class="p-title">
+						SetUp
+						<span id="close" class="close">&#9932</span>
+					</div>
+					<div class="cell">
+						<p class="c-t">The background music：</p>
+						<select id="music">
+							<option value="on" selected="selected">ON</option>
+							<option value="off">OFF</option>
+						</select>
+					</div>
+					<div class="cell">
+						<p class="c-t">E-mail：</p>
+						<p class="content">12541414@qq.com</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<audio class="d-none" autoplay="autoplay">
+			<source src="Sneaky Snitch.mp3" type="audio/mpeg">
+		</audio>
+	</body>
+	<script src="../jq/jquery-3.6.0.js" type="text/javascript" charset="utf-8"></script>
+	<script>
+		$(() => {
+			// $('body').mousemove(() => {
+			// 	audioPlay();
+			// 	$("body").unbind();
+			// });
+			// $('#playinput').focus();
+		})
+		$('#close').click((e) => {
+			$('.setting-box').hide();
+		})
+		$('#openSet').click((e) => {
+			$('.setting-box').show();
+		})
+		// play audio
+		function audioPlay() {
+			var audio = document.querySelector("audio");
+			audio.play();
+		}
+		
+		// login
+		function Login(){
+			window.location.href = 'index.html';
+		}
+	</script>
+</html>

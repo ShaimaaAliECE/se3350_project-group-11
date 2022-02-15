@@ -1,0 +1,79 @@
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+body {
+  background: url(login-b.jpg);
+}
+.registered-box {
+  width: 400px;
+  height: 350px;
+  border-radius: 6px;
+  box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.3);
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  background: rgba(255, 255, 255, 0.6);
+}
+.registered-box .main-registered {
+  width: 100%;
+  height: 300px;
+  position: relative;
+}
+.registered-box .main-registered .box-title {
+  width: 100%;
+  text-align: center;
+}
+.registered-box .main-registered .input-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.registered-box .main-registered .input-box .i-t {
+  width: 65px;
+  font-size: 15px;
+  text-align: right;
+  color: #606266;
+}
+.registered-box .main-registered .input-box input {
+  width: 200px;
+  height: 32px;
+  margin-left: 10px;
+  border: thin solid #e4e7ed;
+  border-radius: 4px;
+  padding-left: 10px;
+}
+.registered-box .main-registered .input-box input:focus {
+  outline: none;
+  border: thin solid #409EFF;
+}
+.registered-box .main-registered .but-box {
+  width: 100%;
+  margin-top: 25px;
+}
+.registered-box .main-registered .but-box button {
+  width: 300px;
+  height: 35px;
+  background-color: #409eff;
+  border: none;
+  color: #ffffff;
+  font-size: 17px;
+  border-radius: 6px;
+  margin: 0 auto;
+  display: block;
+  cursor: pointer;
+}
+.registered-box .main-registered .login {
+  position: absolute;
+  right: 10px;
+  bottom: 0;
+}
+.registered-box .main-registered .login a {
+  color: #909399;
+}

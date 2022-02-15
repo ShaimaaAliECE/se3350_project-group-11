@@ -1,0 +1,91 @@
+html,
+body {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	background: url(login-b.jpg);
+}
+
+.registered-box {
+	width: 400px;
+	height: 350px;
+	border-radius: 6px;
+	box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.3);
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: auto;
+	background: rgba(255,255,255,0.6);
+
+	.main-registered {
+		width: 100%;
+		height: 300px;
+		position: relative;
+
+		.box-title {
+			width: 100%;
+			text-align: center;
+		}
+
+		.input-box {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+
+			.i-t {
+				width: 65px;
+				font-size: 15px;
+				text-align: right;
+				color: #606266;
+			}
+
+			input {
+				width: 200px;
+				height: 32px;
+				margin-left: 10px;
+				border: thin solid #e4e7ed;
+				border-radius: 4px;
+				padding-left: 10px;
+			}
+
+			input:focus {
+				outline: none;
+				border: thin solid #409EFF;
+			}
+		}
+
+		.but-box {
+			width: 100%;
+			margin-top: 25px;
+
+			button {
+				width: 300px;
+				height: 35px;
+				background-color: #409eff;
+				border: none;
+				color: #ffffff;
+				font-size: 17px;
+				border-radius: 6px;
+				margin: 0 auto;
+				display: block;
+				cursor: pointer;
+			}
+		}
+
+		.login {
+			position: absolute;
+			right: 10px;
+			bottom: 0;
+
+			a {
+				color: #909399;
+			}
+		}
+	}
+}
