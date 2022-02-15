@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script src="https://kit.fontawesome.com/1d19cfb0ea.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" type="text/css" href="Css/sidebar.css" />
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -9,7 +11,47 @@
   <title>Quiz App</title>
 </head>
 <body>
-  <div class="container">
+  <div class="sidenav">
+    <ul>
+        <li>  
+            <a href="/LevelOne.html">
+                <span class = 'icon'><i class="fas fa-chevron-circle-down"></i></span>
+                <span class = 'title'> level 1</span>
+            </a>
+        </li>
+        <li>  
+            <a href="/LevelTwo.html">
+                <span class = 'icon'></span>
+                <span class = 'title'>level 2</span>
+            </a>
+        </li>
+        <li>  
+            <a href="/LevelThree.html">
+                <span class = 'icon'></span>
+                <span class = 'title'>level 3</span>
+            </a>
+        </li>
+        <li>  
+            <a href="#">
+                <span class = 'icon'></span>
+                <span class = 'title'>level 4</span>
+            </a>
+        </li>
+        <li>  
+            <a href="#">
+                <span class = 'icon'></span>
+                <span class = 'title'>level 5</span>
+            </a>
+        </li>
+        <li>  
+            <a href="/Game.html">
+                <span class = 'icon'><i class="fas fa-door-open"></i></span>
+                <span class = 'title'>Back</span>
+            </a>
+        </li>
+    </ul>
+</div>
+  <div class="main">
     <div id="question-container" class="hide">
       <div id="answer-buttons" class="btn-grid">
         <button class="btn" id="btn10"></button>
@@ -25,7 +67,7 @@
       </div>
     </div>
   </div>
-  <div class="container">
+  <div class="main">
     <div id="question-container2" class="hide">
       <div id="answer-buttons2" class="btn-grid">
         <button class="btn" id="btn20"></button>
@@ -46,7 +88,7 @@
       </div>
     </div>
   </div>
-  <div class="container">
+  <div class="main">
     <div id="question-container3" class="hide">
       <div id="answer-buttons3" class="btn-grid">
         <button class="btn" id="btn30"></button>
