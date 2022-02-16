@@ -1,0 +1,174 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  font-family: Gotham Rounded;
+}
+
+:root {
+  --hue-neutral: 200;
+  --hue-wrong: 0;
+  --hue-correct: 145;
+}
+
+body {
+  --hue: var(--hue-neutral);
+  padding: 0;
+  margin: 0;
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  /* background-color: hsl(var(--hue), 100%, 20%); */
+  background-color: white;
+}
+
+body.correct {
+  /* --hue: var(--hue-correct); */
+  background-color: var(--hue-correct);
+}
+
+body.wrong {
+  --hue: var(--hue-wrong);
+}
+
+.container {
+  width: 100px;
+  max-width: 80%;
+  background-color: white;
+  border-radius: 5px;
+  padding: 10px;
+  /* box-shadow: 0 0 10px 2px; */
+}
+
+.btn-grid {
+  display: grid;
+  grid-template-columns: repeat(1, 75px);
+  gap: 5px;
+  margin: 20px 0;
+  justify-content: center;
+  align-items: center;
+}
+
+.controls {
+  position: fixed;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.btn {
+  --hue: var(--hue-neutral);
+  border: 1px solid hsl(var(--hue), 100%, 30%);
+  background-color: hsl(var(--hue), 100%, 50%);
+  border-radius: 5px;
+  padding: 5px 10px;
+  /* color: white; */
+  color: black;
+  font-size: large;
+  font-weight: bold;
+  outline: none;
+}
+
+.btn:hover {
+  border-color: black;
+}
+
+.btn.correct {
+  --hue: var(--hue-correct);
+  color: black;
+}
+
+.btn.wrong {
+  --hue: var(--hue-wrong);
+}
+
+.start-btn, .next-btn {
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding: 10px 20px;
+}
+
+
+
+.hide {
+  display: none;
+}
+
+.instruction-container{
+  display: none;
+  position: fixed;
+  border-radius: 10px;
+  width: 600px;
+  height: 600px;
+  padding: 10px;
+  /* top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0; */
+  background-color: rgba(0, 0, 0, .9);
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 2rem;
+  flex-direction: column;
+}
+
+.instruction-container.show{
+  display: flex;
+}
+
+.instruction-container button{
+  position: relative;
+  top: 10px;
+  font-size: 2rem;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: .25em .5em;
+  cursor: pointer;
+  /* top: 5px;
+  bottom: 5px;
+  left: 5px;
+  right: 5px; */
+}
+.gameTime{
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  font-size: 26px;
+  color: black;
+}
+.minTimerCon,.secTimerCon,.WhenTimerCon1,.WhenTimerCon2{
+  font-weight: 600;
+  margin: 0 10px;
+}
+.whenTime{
+  display: none;
+  margin-top: 20px;
+}
+.restart{
+  display: none;
+  position: fixed;
+  border-radius: 10px;
+  width: 600px;
+  height: 600px;
+  padding: 10px;
+  /* top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0; */
+  background-color: rgba(0,0,0,0.9);
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  flex-direction: column;
+  z-index: 999;
+}
+.reset_btn{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  font-size: 24px;
+  padding: 10px 20px;
+}

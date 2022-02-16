@@ -9,6 +9,7 @@
   <title>Quiz App</title>
 </head>
 <body>
+  <div class="gameTime">Game time: <span class="minTimerCon">0</span>:<span class="secTimerCon">0</span> </div>
   <div class="container">
     <div id="question-container" class="hide">
       <div id="answer-buttons" class="btn-grid">
@@ -63,10 +64,19 @@
     </div>
   </div>
   <div class="controls">
-    <button id="start-btn" class="start-btn btn">Start</button>
+    <button id="start-btn" class="btn-grid btn">Start</button>
     <button id="next-btn" class="next-btn btn hide">Next</button>
+  </div>
+  <div class="instruction-container" id="instructionContainer">
+    <div data-instruction-message-text></div>
+    <button id="ok-button">Ok</button>
+    <div class="whenTime">When the time: <span class="WhenTimerCon1">0</span>:<span class="WhenTimerCon2">0</span></div>
+  </div>
+  <div class="restart">
+    <button class="reset_btn">Reset</button>
   </div>
   <audio src="Correct.mp3" id="correct-audio" type="audio/mpeg"></audio>
   <audio src="Wrong.mp3" id="wrong-audio" type="audio/mpeg"></audio>
+  <script src="timer.js"></script>
 </body>
 </html>

@@ -1,10 +1,13 @@
 
-
 //Start button/restart button
 const startButton = document.getElementById('start-btn')
 //Button for advancing after getting step complete. Not used currently
 const nextButton = document.getElementById('next-btn')
 
+// Get end time
+const WhenTimerCon1 = document.querySelector(".WhenTimerCon1");
+const WhenTimerCon2 = document.querySelector(".WhenTimerCon2");
+const whenTime = document.querySelector(".whenTime");
 
 var questionContainerElements = [document.getElementById('question-container'),  document.getElementById('question-container2'), document.getElementById('question-container3'),  document.getElementById('question-container4'),document.getElementById('question-container5'), document.getElementById('question-container6') ]
 //const questionElement = document.getElementById('question')
@@ -20,7 +23,7 @@ var numbers = []
 //An array to store sorted arrays. To check if the user ordered correctly
 var sorted = []
 
-//For step 3. Is either 3 or 4 for when the split is uneven. 
+//For step 3. Is either 3 or 4 for when the split is uneven.
 var split
 
 //Just a variable to be incremented for the sorting step
@@ -29,13 +32,29 @@ var correct = 0
 const correctAudio = document.getElementById('correct-audio');
 const wrongAudio = document.getElementById('wrong-audio');
 
+var instructionContainerElement = document.getElementById('instructionContainer');
+var instructionElementText = document.querySelector('[data-instruction-message-text]');
+var okButton = document.getElementById('ok-button');
+
+
+
+okButton.addEventListener('click',function() {
+  instructionContainerElement.classList.remove('show');
+});
+
+
+
 startButton.addEventListener('click', startGame)
 /*nextButton.addEventListener('click', () => {
   setNextLevel()
 })*/
 
+showInstruction("How to play: select the correct option. a wrong attempt will turn red")
+
 function startGame() {
-  alert("How to play: select the correct option. a wrong attempt will turn red")
+  Timer()
+  showInstruction("How to play: select the correct option. a wrong attempt will turn red")
+  //alert("How to play: select the correct option. a wrong attempt will turn red")
   step = 1
   resetState()
   startButton.classList.add('hide')
@@ -45,7 +64,7 @@ function startGame() {
   for(x=0; x<7;x++){
     numbers.pop()
   }
-  
+
   fillArray()
 }
 
@@ -73,7 +92,8 @@ function fillArray() {
   }
   numbers.push(nums)
   showQuestion(0)
-  alert("Step 1: Split the list of numbers evenly. Click the number below where you want to split")
+  showInstruction("Step 1: Split the list of numbers evenly. Click the number where you want to split");
+  //alert("Step 1: Split the list of numbers evenly. Click the number below where you want to split")
 }
 
 
@@ -92,7 +112,8 @@ function setNextLevel(x) {
     questionContainerElements[1].classList.remove('hide')
     questionContainerElements[4].classList.remove('hide')
     numbers.push(nums)
-    alert("Step 2: Split the list of numbers as evenly as possible. Click the number below where you want to split")
+    showInstruction("Step 2: Split the list of numbers as evenly as possible. Click the number where you want to split");
+    //alert("Step 2: Split the list of numbers as evenly as possible. Click the number below where you want to split")
   }
 
   else if (x == 2){
@@ -114,7 +135,8 @@ function setNextLevel(x) {
     split = 4
     step++
     x++
-    alert("Step 3: Select the numbers in order from smallest to largest")
+    showInstruction("Step 3: Select the numbers in order from smallest to largest");
+    //alert("Step 3: Select the numbers in order from smallest to largest")
   }
 
   else if (x == 4){
@@ -123,7 +145,8 @@ function setNextLevel(x) {
       nums.push(numbers[0][i+5])
     }
     numbers.push(nums)
-    alert("Step 4: Split the list of numbers as evenly as possible. Click the number below where you want to split")
+    showInstruction("Step 4: Split the list of numbers as evenly as possible. Click the number where you want to split");
+    //alert("Step 4: Split the list of numbers as evenly as possible. Click the number below where you want to split")
   }
 
   else if (x == 5){
@@ -146,14 +169,16 @@ function setNextLevel(x) {
     step++
     correct = 0
     x++
-    alert("Step 5: Select the numbers in order from smallest to largest")
+    showInstruction("Step 5: Select the numbers in order from smallest to largest");
+    //alert("Step 5: Select the numbers in order from smallest to largest")
   }
 
   else if (x == 7){
     //Sorts all ten numbers
     sorted = numbers[0].sort(function(a, b){return a - b})
     correct = 0
-    alert("Step 6: Select the numbers in order from smallest to largest")
+    showInstruction("Step 6: Select the numbers in order from smallest to largest");
+    //alert("Step 6: Select the numbers in order from smallest to largest")
   }
 
   showQuestion(x)
@@ -168,10 +193,10 @@ function showQuestion(x) {
     var z = 0
     for ( y in nums){
       var button
-      if (x==2 || x==3 || x==5 || x==6){ 
+      if (x==2 || x==3 || x==5 || x==6){
             button = document.getElementById(`btn${split}${z}`)
           }
-      else { 
+      else {
             button = document.getElementById(`btn${step}${z}`)
           }
       button.innerText = nums[y]
@@ -201,14 +226,14 @@ function resetState() {
 
   if (step <4||step==6||step==8){
     Array.from(answerButtonsElements[y].children).forEach(button => {
-      
+
       button.removeEventListener('click', selectAnswer)
       if (step >2){ button.innerText = ""}
     })
   }
 
- 
- 
+
+
   nextButton.classList.add('hide')
 
 }
@@ -304,6 +329,11 @@ function selectAnswer(e) {
         Array.from(answerButtonsElements[0].children).forEach(button => {
           setStatusClass(button, true);
           setStatusClass(document.body,true);
+          showInstruction("Awsome! Great Job")
+          whenTime.style.display = 'block'
+          WhenTimerCon1.innerHTML = minTimer;
+          WhenTimerCon2.innerHTML = secTimer;
+          clearInterval(clearTimer)
         })
       }
   }
@@ -328,7 +358,7 @@ function clearStatusClass(x) {
 function correctSelection(selectedButton){
   selectedButton.classList.add('correct');
   window.setTimeout(function(){selectedButton.classList.remove('correct')},100);
-  //correctAudio.play();
+  correctAudio.play();
 
 }
 
@@ -336,7 +366,19 @@ function wrongSelection(selectedButton){
   selectedButton.classList.add('wrong');
   window.setTimeout(function(){selectedButton.classList.remove('wrong')},100);
   wrongAudio.play();
+  showInstruction("Wrong! Please Try Again");
 
 }
 
-// made some comments 
+//displays the instructions to be shown to the user
+function showInstruction(instructions)
+{
+  instructionContainerElement.classList.add('show');
+  instructionElementText.innerText = instructions;
+
+}
+
+
+
+// made some comments
+
