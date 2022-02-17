@@ -419,8 +419,17 @@ function restartGame()
 {
   numWrongAttempts = 0;
   step = 1;
-  startGame();
+  clearPage(); // clear the page from previous game
+  
 }
 
+// clears the page by adding 'hide' to each containers classList
+function clearPage()
+{
+  startButton.classList.remove('hide');// removes 'hide' from the start buttons classList so user can press to play a new game
 
+   questionContainerElements.forEach((container) => {
+     container.classList.add('hide');
+   });
+}
 // made some comments 
