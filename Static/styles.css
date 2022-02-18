@@ -108,3 +108,44 @@ body.wrong {
 body.timeOut {
     background: #f00;
 }
+
+/* khash added  */
+.instruction-container{
+    display: none;
+    position: fixed;
+    top: 150px;
+    left: 100px;
+    right: 100px;
+    bottom: 0;
+    border-radius: 10px;
+    width: 600px;
+    height: 600px;
+    padding: 10px;
+    
+    background-color: rgba(0, 0, 0, .9);
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 2rem;
+    flex-direction: column;
+  }
+  
+  .instruction-container.show{
+    display: flex;
+  }
+  
+  .instruction-container button{
+    position: relative;
+    top: 10px;
+    font-size: 2rem;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: .25em .5em;
+    cursor: pointer;
+    /* top: 5px;
+    bottom: 5px;
+    left: 5px;
+    right: 5px; */
+  }
+  /* khash added  */

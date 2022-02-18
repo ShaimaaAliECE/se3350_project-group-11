@@ -26,6 +26,16 @@ const btn51 = document.getElementById('btn51');
 const btn53 = document.getElementById('btn53');
 const btn54 = document.getElementById('btn54');
 
+//khash 
+var instructionContainerElement = document.getElementById('instructionContainer');
+var instructionElementText = document.querySelector('[data-instruction-message-text]');
+var okButton = document.getElementById('ok-button');
+okButton.addEventListener('click',function() {
+  instructionContainerElement.classList.remove('show');
+});
+okButton.classList.add('hide');
+//khash
+
 let nextButtonValues = [];
 /*nextButtonValues.push(btn1);
 nextButtonValues.push(btn2);
@@ -79,10 +89,15 @@ lastButtonSet.push(btn54);
 let nextCounter = 0;
 
 //console.logs are used for my own debugging theyre randomly all over the place
-nextButton.addEventListener('click', () => {
+//console.logs are used for my own debugging theyre randomly all over the place
+nextButton.addEventListener('click', onNextBtnEventListener);
+
+function onNextBtnEventListener()
+{
   nextCounter++;
   console.log(nextCounter)
 
+  
   //next button Values was used before I used counter but this can be redone so its more consistent with the rest of the event listner
   if(nextButtonValues.length>0){
     selectAnswer(nextButtonValues.pop())
@@ -221,8 +236,7 @@ nextButton.addEventListener('click', () => {
       break
     }
   }
-
-})
+}
 
 //Early attempt
 /*
@@ -279,7 +293,8 @@ function answerStep3(){
 */
 
 function startGame() {
-  alert("How to play: select the correct option. a wrong attempt will turn red")
+  //alert("How to play: select the correct option. a wrong attempt will turn red")
+  showInstruction("How to play: select the correct option. a wrong attempt will turn red");
   step = 1
   resetState()
   startButton.classList.add('hide')
@@ -317,7 +332,8 @@ function fillArray() {
   }
   numbers.push(nums)
   showQuestion(0)
-  alert("Step 1: Split the list of numbers evenly. Click the number below where you want to split")
+  //alert("Step 1: Split the list of numbers evenly. Click the number below where you want to split")
+  showInstruction("Step 1: Split the list of numbers evenly. Click the number below where you want to split");
 }
 
 
@@ -336,7 +352,8 @@ function setNextLevel(x) {
     questionContainerElements[1].classList.remove('hide')
     questionContainerElements[4].classList.remove('hide')
     numbers.push(nums)
-    alert("Step 2: Split the list of numbers as evenly as possible. Click the number below where you want to split")
+    //alert("Step 2: Split the list of numbers as evenly as possible. Click the number below where you want to split")
+    showInstruction("Step 2: Split the list of numbers as evenly as possible. Click the number below where you want to split");
   }
 
   else if (x == 2){
@@ -358,7 +375,8 @@ function setNextLevel(x) {
     split = 4
     step++
     x++
-    alert("Step 3: Select the numbers in order from smallest to largest")
+    //alert("Step 3: Select the numbers in order from smallest to largest")
+    showInstruction("Step 3: Select the numbers in order from smallest to largest");
   }
 
   else if (x == 4){
@@ -367,7 +385,8 @@ function setNextLevel(x) {
       nums.push(numbers[0][i+5])
     }
     numbers.push(nums)
-    alert("Step 4: Split the list of numbers as evenly as possible. Click the number below where you want to split")
+    //alert("Step 4: Split the list of numbers as evenly as possible. Click the number below where you want to split")
+    showInstruction("Step 4: Split the list of numbers as evenly as possible. Click the number below where you want to split");
   }
 
   else if (x == 5){
@@ -390,14 +409,16 @@ function setNextLevel(x) {
     step++
     correct = 0
     x++
-    alert("Step 5: Select the numbers in order from smallest to largest")
+    //alert("Step 5: Select the numbers in order from smallest to largest")
+    showInstruction("Step 5: Select the numbers in order from smallest to largest");
   }
 
   else if (x == 7){
     //Sorts all ten numbers
     sorted = numbers[0].sort(function(a, b){return a - b})
     correct = 0
-    alert("Step 6: Select the numbers in order from smallest to largest")
+    //alert("Step 6: Select the numbers in order from smallest to largest")
+    showInstruction("Step 6: Select the numbers in order from smallest to largest");
   }
 
   showQuestion(x)
@@ -553,5 +574,15 @@ function clearStatusClass(x) {
     button.classList.remove('wrong')
   })
 }
+
+
+//khash
+function showInstruction(instructions)
+{
+  instructionContainerElement.classList.add('show');
+  instructionElementText.innerText = instructions;
+
+}
+//khash
 
 // made some comments !
