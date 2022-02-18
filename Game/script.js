@@ -47,6 +47,11 @@ okButton.addEventListener('click',function() {
   instructionContainerElement.classList.remove('show');
 });
 
+restartButton.addEventListener('click',() => {
+  restartContainerElement.classList.remove('show');
+  restartGame();
+});
+
 
 
 startButton.addEventListener('click', startGame)
@@ -409,10 +414,6 @@ function gameOver()
 {
   gameoverAudio.play();
   showGameEnding("3 Wrong selections \n Game Over !");
-  restartButton.addEventListener('click',() => {
-    restartContainerElement.classList.remove('show');
-    restartGame();
-  });
 }
 
 function restartGame()
