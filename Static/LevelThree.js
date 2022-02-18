@@ -1,6 +1,6 @@
 
 
-let timeSecond = 30;
+let timeSecond = 60;
 const timeH = document.querySelector("h1");
 
 displayTime(timeSecond);
@@ -60,8 +60,31 @@ var split
 //Just a variable to be incremented for the sorting step
 var correct = 0
 
+var numWrongAttempts = 0;
+
 const correctAudio = document.getElementById('correct-audio');
 const wrongAudio = document.getElementById('wrong-audio');
+const winningAudio = document.getElementById('winning-audio');
+const gameoverAudio = document.getElementById('gameover-audio');
+
+//khash
+
+var instructionContainerElement = document.getElementById('instructionContainer');
+var instructionElementText = document.querySelector('[data-instruction-message-text]');
+var restartContainerElement = document.getElementById('restartContainer');
+var restartElementText = document.querySelector('[ data-message-text]');
+var okButton = document.getElementById('ok-button');
+var restartButton = document.getElementById('restart-button');
+
+okButton.addEventListener('click',function() {
+  instructionContainerElement.classList.remove('show');
+});
+
+restartButton.addEventListener('click',() => {
+  restartContainerElement.classList.remove('show');
+  restartGame();
+});
+//khash
 
 startButton.addEventListener('click', startGame)
 /*nextButton.addEventListener('click', () => {
@@ -69,7 +92,8 @@ startButton.addEventListener('click', startGame)
 })*/
 
 function startGame() {
-  alert("How to play: select the correct option. a wrong attempt will turn red")
+  //showInstruction("How to play: select the correct option. a wrong attempt will turn red")
+  //alert("How to play: select the correct option. a wrong attempt will turn red")
   step = 1
   resetState()
   startButton.classList.add('hide')
@@ -340,6 +364,7 @@ function selectAnswer(e) {
         Array.from(answerButtonsElements[0].children).forEach(button => {
           setStatusClass(button, true);
           setStatusClass(document.body,true);
+          gameEndingMessage();
         })
       }
   }
@@ -364,15 +389,80 @@ function clearStatusClass(x) {
 function correctSelection(selectedButton){
   selectedButton.classList.add('correct');
   window.setTimeout(function(){selectedButton.classList.remove('correct')},100);
-  correctAudio.play();
+  //correctAudio.play();
 
 }
 
 function wrongSelection(selectedButton){
+  numWrongAttempts++;
+
+  //when the user exceeds 3 wrong choice call a function to do something ... 
+  if(numWrongAttempts == 3)
+  {
+    gameOver();
+  }
   selectedButton.classList.add('wrong');
   window.setTimeout(function(){selectedButton.classList.remove('wrong')},100);
   wrongAudio.play();
 
 }
+
+//khash
+//displays the instructions to be shown to the user 
+function showInstruction(instructions)
+{
+  instructionContainerElement.classList.add('show');
+  instructionElementText.innerText = instructions;
+
+}
+
+function showGameEnding(gameEndingText)
+{
+  console.log("inside showGameEnding")
+  restartContainerElement.classList.add('show');
+  restartElementText.innerText = gameEndingText;
+}
+
+function gameEndingMessage()
+{
+  winningAudio.play();
+  if(numWrongAttempts == 0)
+  {
+    showGameEnding("Awsome! \n Perfect Score!");
+  }
+  else{
+    showGameEnding("Good Job! \n Number of Wrong Selections: " +numWrongAttempts);
+  }
+  
+
+}
+
+function gameOver()
+{
+  console.log("inside gameOver")
+  gameoverAudio.play();
+  showGameEnding("3 Wrong selections \n Game Over !");
+}
+
+function restartGame()
+{
+  numWrongAttempts = 0;
+  step = 1;
+  clearPage(); // clear the page from previous game
+  
+}
+
+// clears the page by adding 'hide' to each containers classList
+function clearPage()
+{
+  startButton.classList.remove('hide');// removes 'hide' from the start buttons classList so user can press to play a new game
+
+   questionContainerElements.forEach((container) => {
+     container.classList.add('hide');
+   });
+}
+
+
+//khash
 
 // made some comments 
