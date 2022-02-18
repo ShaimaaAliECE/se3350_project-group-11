@@ -1,18 +1,38 @@
 
 
-let timeSecond = 60;
+let timeSecond = 0;
 const timeH = document.querySelector("h1");
+let counter;
+let timeElapsed;
 
 displayTime(timeSecond);
 
-const countDown = setInterval(() => {
-  timeSecond--;
-  displayTime(timeSecond);
-  if (timeSecond == 0 || timeSecond < 1) {
-    endCount();
-    clearInterval(countDown);
-  }
-}, 1000);
+function countUp()
+{
+  timeSecond = 0;
+  counter = setInterval(() => {
+    timeSecond++;
+    displayTime(timeSecond)
+  }, 1000);
+} 
+
+function endCountUp()
+{
+  clearInterval(counter)
+}
+
+function countDown()
+{
+  setInterval(() => {
+    timeSecond--;
+    displayTime(timeSecond);
+    if (timeSecond == 0 || timeSecond < 1) {
+      endCount();
+      clearInterval(countDown);
+    }
+  }, 1000);
+}
+
 
 function displayTime(second) {
   const min = Math.floor(second / 60);
@@ -94,6 +114,7 @@ startButton.addEventListener('click', startGame)
 function startGame() {
   //showInstruction("How to play: select the correct option. a wrong attempt will turn red")
   //alert("How to play: select the correct option. a wrong attempt will turn red")
+  countUp();
   step = 1
   resetState()
   startButton.classList.add('hide')
@@ -425,13 +446,14 @@ function showGameEnding(gameEndingText)
 
 function gameEndingMessage()
 {
+  endCountUp();
   winningAudio.play();
   if(numWrongAttempts == 0)
   {
-    showGameEnding("Awsome! \n Perfect Score!");
+    showGameEnding("Awsome! \n Perfect Score! \n Time Elasped: " + timeSecond);
   }
   else{
-    showGameEnding("Good Job! \n Number of Wrong Selections: " +numWrongAttempts);
+    showGameEnding("Good Job! \n Number of Wrong Selections: " +numWrongAttempts +"\n Time Elapsed: " +timeSecond);
   }
   
 
@@ -441,6 +463,7 @@ function gameOver()
 {
   console.log("inside gameOver")
   gameoverAudio.play();
+  endCountUp();
   showGameEnding("3 Wrong selections \n Game Over !");
 }
 
