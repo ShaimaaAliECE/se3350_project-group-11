@@ -2,7 +2,8 @@
 *::before,
 *::after {
     box-sizing: border-box;
-    font-family: Gotham Rounded;
+    /*font-family: Gotham Rounded;*/
+    /* comment this because otherwise icon cannot shown*/
 }
 
 * {
