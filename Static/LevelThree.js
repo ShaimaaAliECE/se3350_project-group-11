@@ -478,11 +478,17 @@ function restartGame()
 // clears the page by adding 'hide' to each containers classList
 function clearPage()
 {
+  document.body.classList.remove('correct');
+  clearStatusClass(0);
+  displayTime(0);
   startButton.classList.remove('hide');// removes 'hide' from the start buttons classList so user can press to play a new game
 
    questionContainerElements.forEach((container) => {
      container.classList.add('hide');
    });
+
+  
+
 }
 
 
