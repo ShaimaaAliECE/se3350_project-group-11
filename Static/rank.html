@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Rank</title>
+    <style>
+        body {
+            background-color: #003F66;
+            color: white;
+        }
+
+    </style>
+</head>
+<body>
+    <div>
+        <h1>Play Time Rank</h1>
+    </div>
+    <ol id="rank-list">
+
+    </ol>
+    <script>
+        fetch("/rank").then(res => res.json()).then(data => {
+            let htmlfragment = document.createDocumentFragment();
+            data.forEach(item => {
+               let li = document.createElement("li");
+               let time = item.playTime;
+               let timeStr = '';
+               if (time > 60) {
+                   timeStr = Math.floor(time) + '  minutes';
+               } else {
+                   timeStr = time + '  seconds';
+               }
+               li.innerHTML = `${item.account}  ${timeStr}`;
+               htmlfragment.appendChild(li);
+            });
+            document.getElementById('rank-list').appendChild(htmlfragment);
+        })
+
+    </script>
+</body>
+</html>
