@@ -223,7 +223,7 @@ doThis();
 
 var buttonArray = []
 while (buttonArray.length < elementAmount){
-  var x = getRndInteger(1,elementAmount+1)
+  var x = getRndInteger(1,51)
   var e = false
 
   //Checks if new integer is already in array. Does not add if so

@@ -23,7 +23,6 @@ app.get("/start", (req, res) => {
 app.get("/setting", (req, res) => {
     res.redirect("Setting.html");
 });
-
 app.get("/level1", (req, res) => {
     res.redirect("LevelOne.html");
 });
@@ -32,6 +31,15 @@ app.get("/level2", (req, res) => {
 });
 app.get("/level3", (req, res) => {
     res.redirect("LevelThree.html");
+});
+app.get("/level4", (req, res) => {
+    res.redirect("LevelFour.html");
+});
+app.get("/level5", (req, res) => {
+    res.redirect("LevelFive.html");
+});
+app.get("/customLevelSelect", (req, res) => {
+    res.redirect("CustomLevelSelect.html");
 });
 
 app.listen(80);

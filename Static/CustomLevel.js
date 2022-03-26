@@ -1,5 +1,19 @@
 //Work in progress to make elements appear dynamically
 
+var r = window.location.search;
+var thenum = r.split(/[&?=]+/)
+let passedValues=[];
+for(let i=0;i<thenum.length;i++)
+{
+  if(isNaN(thenum[i]))
+  {
+    continue
+  }
+  else
+    passedValues.push(parseInt(thenum[i]));
+}
+passedValues.splice(0,1);
+console.log(passedValues);
 //Start button
 const startButton = document.getElementById('start-btn')
 
@@ -112,7 +126,7 @@ function endCount() {
 
 //This code snippet determines the amount of divs are needed to hold the divisions made by the merge sort
 let deleteButtonList = []
-const elementAmount = 20;
+const elementAmount = passedValues[0];
 const elementAmountReset = elementAmount;
 let elmnts = elementAmount;
 let divAmount = 1;
@@ -223,7 +237,7 @@ doThis();
 
 var buttonArray = []
 while (buttonArray.length < elementAmount){
-  var x = getRndInteger(1,elementAmount+1)
+  var x = getRndInteger(passedValues[1],passedValues[2]+1)
   var e = false
 
   //Checks if new integer is already in array. Does not add if so
@@ -430,7 +444,7 @@ function selectButton(e) {
       return;
     }
     let arr = masterArray[parseInt(selectedButton.id.substring(0,1))];
-    lowestNum = 100;
+    lowestNum = 1000000;
     for (let i=0;i<arr.length;i++)
     {
       if(arr[i][0]<lowestNum)

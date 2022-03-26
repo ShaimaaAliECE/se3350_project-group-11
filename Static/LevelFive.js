@@ -112,7 +112,7 @@ function endCount() {
 
 //This code snippet determines the amount of divs are needed to hold the divisions made by the merge sort
 let deleteButtonList = []
-const elementAmount = 20;
+const elementAmount = 50;
 const elementAmountReset = elementAmount;
 let elmnts = elementAmount;
 let divAmount = 1;
@@ -165,6 +165,7 @@ function addDiv2(){
   {
       let div = document.createElement("div");
       div.classList.add(i);
+      //div.classList.add("custom");
       if(i==0)
       {
       div.classList.add("hide");
@@ -203,6 +204,8 @@ function addDiv2(){
 
 document.body.onload = addDiv2();
 
+
+
 var questionContainerElements = [document.getElementById('question-container'),  document.getElementById('question-container2'), document.getElementById('question-container3'),  document.getElementById('question-container4'),document.getElementById('question-container5'), document.getElementById('question-container6') ]
 //const questionElement = document.getElementById('question')
 var questionContainerElementsVer2 = [];
@@ -223,7 +226,7 @@ doThis();
 
 var buttonArray = []
 while (buttonArray.length < elementAmount){
-  var x = getRndInteger(1,elementAmount+1)
+  var x = getRndInteger(1,101)
   var e = false
 
   //Checks if new integer is already in array. Does not add if so
@@ -839,3 +842,6 @@ function restartGame()
 
 //khash
 
+let divList = document.getElementsByClassName("6")
+let div6 = divList[0];
+div6.addClass("custom");

@@ -8,31 +8,9 @@
     <link rel="stylesheet" type="text/css" href="Css/navBar.css" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Game</title>
+    <title>Custom Level Select</title>
 </head>
 <body>
-    <h1>
-        Level Select..
-    </h1>
-    <form id = 'level1' action = '/level1' method = 'get'>
-        <button class = 'MainPage'>LEVEL 1</button>
-    </form>
-    <form id = 'level2' action = '/level2' method = 'get'>
-        <button class = 'MainPage'>LEVEL 2</button>
-    </form>
-    <form id = 'level3' action = '/level3' method = 'get'>
-        <button class = 'MainPage'>LEVEL 3</button>
-    </form>
-    <form id = 'level4' action = '/level4' method = 'get'>
-        <button class = 'MainPage'>LEVEL 4</button>
-    </form>
-    <form id = 'level5' action = '/level5' method = 'get'>
-        <button class = 'MainPage'>LEVEL 5</button>
-    </form>
-    <form id = 'customLevelSelect' action = '/customLevelSelect' method = 'get'>
-        <button class = 'MainPage'>Custom Level</button>
-    </form>
-    =========
     <div class="sidenav">
         <ul>
             <li>  
@@ -77,6 +55,17 @@
         <h1>
             Sorting Algorithm
         </h1>
+        <h2>
+            Custom Level
+        </h2>
+        <form id = 'startCustomGame' action = 'CustomLevel.html'>
+            <h3>Enter the amount of numbers to be sorted</h3>
+            <input type="number" name="totalNumbers" placeholder="Total Numbers" required>
+            <h3>Enter the range of the numbers</h3>
+            <input type="number" name="low" placeholder="Lowest Value" required>
+            <input type="number" name="high" placeholder="Highest Value" required>
+            <input type="submit" value="submit">
+        </form>
 
     </div>
 
