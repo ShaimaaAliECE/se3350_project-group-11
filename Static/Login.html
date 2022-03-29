@@ -7,14 +7,18 @@
         <link rel="stylesheet" href="css/login.css">
     </head>
     <body>
-        <form class="login-form" action="./" method="POST">
+        <form class="login-form" action="/players/login" method="POST">
             <div class="login-form__logo-container">
                 <img class="login-form__logo" src="https://via.placeholder.com/350x150" alt="Logo">
             </div>
             <div class="login-form__content">
-                <div class="login-form__header">Login to your account</div>
-                <input class="login-form__input" type="text" name="username" placeholder="Username">
-                <input class="login-form__input" type="password" name="username" placeholder="Password">
+                <h2 class="login-form__header">Login to your account</h2>
+                <p style="text-align: right">
+                    Not has account?
+                    <a href="/register">Register</a>
+                </p>
+                <input class="login-form__input" type="text" required name="account" placeholder="Username">
+                <input class="login-form__input" type="password" required name="password" placeholder="Password">
                 <button class="login-form__button" type="submit">Login</button>
             </div>
         </form>

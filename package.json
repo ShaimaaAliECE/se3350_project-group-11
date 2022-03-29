@@ -4,14 +4,23 @@
   "description": "se3350_project-group-11 created by GitHub Classroom",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start" : "node index.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.2"
+    "express": "^4.17.2",
+    "cookie-parser": "^1.4.6",
+    "express": "^4.17.2",
+    "mongoose": "^6.2.7"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "dotenv": "^16.0.0",
+    "nodemon": "^2.0.15"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ShaimaaAliECE/se3350_project-group-11.git"

@@ -1,3 +1,4 @@
+//const e = require("express")
 
 
 //Start button/restart button
@@ -26,16 +27,77 @@ var split
 //Just a variable to be incremented for the sorting step
 var correct = 0
 
+var numWrongAttempts = 0;
+
 const correctAudio = document.getElementById('correct-audio');
 const wrongAudio = document.getElementById('wrong-audio');
+const winningAudio = document.getElementById('winning-audio');
+const gameoverAudio = document.getElementById('gameover-audio');
+
+var instructionContainerElement = document.getElementById('instructionContainer');
+var instructionElementText = document.querySelector('[data-instruction-message-text]');
+var restartContainerElement = document.getElementById('restartContainer');
+var restartElementText = document.querySelector('[ data-message-text]');
+var okButton = document.getElementById('ok-button');
+var restartButton = document.getElementById('restart-button');
+
+
+
+okButton.addEventListener('click',function() {
+  instructionContainerElement.classList.remove('show');
+});
+
+restartButton.addEventListener('click',() => {
+  restartContainerElement.classList.remove('show');
+  restartGame();
+});
+
+
 
 startButton.addEventListener('click', startGame)
 /*nextButton.addEventListener('click', () => {
   setNextLevel()
 })*/
 
+showInstruction("How to play: select the correct option. a wrong attempt will turn red")
+let time = 0;
+
+function startCounter() {
+  let count = 0;
+  setInterval(() => {
+    time ++;
+    count ++;
+    document.getElementById("time").innerText = time;
+    if (count === 5) {
+      fetch("/time");
+      count = 0;
+    }
+  }, 1000);
+}
+
+
+function getLatestTime() {
+  fetch("/players/play-time").then(res => res.json()).then(data => {
+    if (data && 'time' in data) {
+      time = data.time;
+      if (time < 60) {
+        document.getElementById("time").innerText = time + '  seconds';
+      } else {
+        document.getElementById("time").innerText = Math.floor(time / 60) + '  minutes';
+      }
+
+    }
+  }).catch(err => {
+    console.log(err)
+  })
+}
+
+getLatestTime();
+
 function startGame() {
-  alert("How to play: select the correct option. a wrong attempt will turn red")
+
+  showInstruction("How to play: select the correct option. a wrong attempt will turn red")
+  //alert("How to play: select the correct option. a wrong attempt will turn red")
   step = 1
   resetState()
   startButton.classList.add('hide')
@@ -73,7 +135,8 @@ function fillArray() {
   }
   numbers.push(nums)
   showQuestion(0)
-  alert("Step 1: Split the list of numbers evenly. Click the number below where you want to split")
+  showInstruction("Step 1: Split the list of numbers evenly. Click the number where you want to split");
+  //alert("Step 1: Split the list of numbers evenly. Click the number below where you want to split")
 }
 
 
@@ -92,7 +155,8 @@ function setNextLevel(x) {
     questionContainerElements[1].classList.remove('hide')
     questionContainerElements[4].classList.remove('hide')
     numbers.push(nums)
-    alert("Step 2: Split the list of numbers as evenly as possible. Click the number below where you want to split")
+    showInstruction("Step 2: Split the list of numbers as evenly as possible. Click the number where you want to split");
+    //alert("Step 2: Split the list of numbers as evenly as possible. Click the number below where you want to split")
   }
 
   else if (x == 2){
@@ -114,7 +178,8 @@ function setNextLevel(x) {
     split = 4
     step++
     x++
-    alert("Step 3: Select the numbers in order from smallest to largest")
+    showInstruction("Step 3: Select the numbers in order from smallest to largest");
+    //alert("Step 3: Select the numbers in order from smallest to largest")
   }
 
   else if (x == 4){
@@ -123,7 +188,8 @@ function setNextLevel(x) {
       nums.push(numbers[0][i+5])
     }
     numbers.push(nums)
-    alert("Step 4: Split the list of numbers as evenly as possible. Click the number below where you want to split")
+    showInstruction("Step 4: Split the list of numbers as evenly as possible. Click the number where you want to split");
+    //alert("Step 4: Split the list of numbers as evenly as possible. Click the number below where you want to split")
   }
 
   else if (x == 5){
@@ -146,14 +212,16 @@ function setNextLevel(x) {
     step++
     correct = 0
     x++
-    alert("Step 5: Select the numbers in order from smallest to largest")
+    showInstruction("Step 5: Select the numbers in order from smallest to largest");
+    //alert("Step 5: Select the numbers in order from smallest to largest")
   }
 
   else if (x == 7){
     //Sorts all ten numbers
     sorted = numbers[0].sort(function(a, b){return a - b})
     correct = 0
-    alert("Step 6: Select the numbers in order from smallest to largest")
+    showInstruction("Step 6: Select the numbers in order from smallest to largest");
+    //alert("Step 6: Select the numbers in order from smallest to largest")
   }
 
   showQuestion(x)
@@ -304,6 +372,7 @@ function selectAnswer(e) {
         Array.from(answerButtonsElements[0].children).forEach(button => {
           setStatusClass(button, true);
           setStatusClass(document.body,true);
+          gameEndingMessage();
         })
       }
   }
@@ -333,10 +402,69 @@ function correctSelection(selectedButton){
 }
 
 function wrongSelection(selectedButton){
+  numWrongAttempts++;
+
+  //when the user exceeds 3 wrong choice call a function to do something ... 
+  if(numWrongAttempts == 3)
+  {
+    gameOver();
+  }
   selectedButton.classList.add('wrong');
   window.setTimeout(function(){selectedButton.classList.remove('wrong')},100);
   wrongAudio.play();
+  //showInstruction("Wrong! Please Try Again");
 
 }
 
+//displays the instructions to be shown to the user 
+function showInstruction(instructions)
+{
+  instructionContainerElement.classList.add('show');
+  instructionElementText.innerText = instructions;
+
+}
+
+function showGameEnding(gameEndingText)
+{
+  restartContainerElement.classList.add('show');
+  restartElementText.innerText = gameEndingText;
+}
+
+function gameEndingMessage()
+{
+  winningAudio.play();
+  if(numWrongAttempts == 0)
+  {
+    showGameEnding("Awsome! \n Perfect Score!");
+  }
+  else{
+    showGameEnding("Good Job! \n Number of Wrong Selections: " +numWrongAttempts);
+  }
+  
+
+}
+
+function gameOver()
+{
+  gameoverAudio.play();
+  showGameEnding("3 Wrong selections \n Game Over !");
+}
+
+function restartGame()
+{
+  numWrongAttempts = 0;
+  step = 1;
+  clearPage(); // clear the page from previous game
+  
+}
+
+// clears the page by adding 'hide' to each containers classList
+function clearPage()
+{
+  startButton.classList.remove('hide');// removes 'hide' from the start buttons classList so user can press to play a new game
+
+   questionContainerElements.forEach((container) => {
+     container.classList.add('hide');
+   });
+}
 // made some comments 

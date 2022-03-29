@@ -14,25 +14,16 @@
     <h1>
         Level Select..
     </h1>
-    <form id = 'level1' action = '/level1' method = 'get'>
+    <a href="/LevelOne.html">
         <button class = 'MainPage'>LEVEL 1</button>
-    </form>
-    <form id = 'level2' action = '/level2' method = 'get'>
+    </a>
+    <a href="/LevelTwo.html">
         <button class = 'MainPage'>LEVEL 2</button>
-    </form>
-    <form id = 'level3' action = '/level3' method = 'get'>
+    </a>
+    <a href="/LevelThree.html">
         <button class = 'MainPage'>LEVEL 3</button>
-    </form>
-    <form id = 'level4' action = '/level4' method = 'get'>
-        <button class = 'MainPage'>LEVEL 4</button>
-    </form>
-    <form id = 'level5' action = '/level5' method = 'get'>
-        <button class = 'MainPage'>LEVEL 5</button>
-    </form>
-    <form id = 'customLevelSelect' action = '/customLevelSelect' method = 'get'>
-        <button class = 'MainPage'>Custom Level</button>
-    </form>
-    =========
+    </a>
+
     <div class="sidenav">
         <ul>
             <li>  
@@ -54,13 +45,13 @@
                 </a>
             </li>
             <li>  
-                <a href="/LevelFour.html">
+                <a href="#">
                     <span class = 'icon'></span>
                     <span class = 'title'>level 4</span>
                 </a>
             </li>
             <li>  
-                <a href="/LevelFive.html">
+                <a href="#">
                     <span class = 'icon'></span>
                     <span class = 'title'>level 5</span>
                 </a>
@@ -79,6 +70,92 @@
         </h1>
 
     </div>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="styles.css" rel="stylesheet">
+  <script src="script.js" defer></script>
+  <title>Quiz App</title>
+</head>
+<body>
+  <div class="container">
+    <div class="time-board" id="time-board">
+      You have Play:
+      <span id="time" class="time-text"></span>
+        <div>
+            <a href="/rank.html">Rank</a>
+        </div>
+    </div>
+
+    <div id="question-container" class="hide">
+      <div id="answer-buttons" class="btn-grid">
+        <button class="btn" id="btn10"></button>
+        <button class="btn" id="btn11"></button>
+        <button class="btn" id="btn12"></button>
+        <button class="btn" id="btn13"></button>
+        <button class="btn" id="btn14"></button>
+        <button class="btn" id="btn15"></button>
+        <button class="btn" id="btn16"></button>
+        <button class="btn" id="btn17"></button>
+        <button class="btn" id="btn18"></button>
+        <button class="btn" id="btn19"></button>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div id="question-container2" class="hide">
+      <div id="answer-buttons2" class="btn-grid">
+        <button class="btn" id="btn20"></button>
+        <button class="btn" id="btn21"></button>
+        <button class="btn" id="btn22"></button>
+        <button class="btn" id="btn23"></button>
+        <button class="btn" id="btn24"></button>
+      </div>
+    </div>
+    <br><br>
+    <div id="question-container5" class="hide">
+      <div id="answer-buttons5" class="btn-grid">
+        <button class="btn" id="btn50"></button>
+        <button class="btn" id="btn51"></button>
+        <button class="btn" id="btn52"></button>
+        <button class="btn" id="btn53"></button>
+        <button class="btn" id="btn54"></button>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div id="question-container3" class="hide">
+      <div id="answer-buttons3" class="btn-grid">
+        <button class="btn" id="btn30"></button>
+        <button class="btn" id="btn31"></button>
+      </div>
+    </div>
+    <br><br>
+    <div id="question-container4" class="hide">
+      <div id="answer-buttons4" class="btn-grid">
+        <button class="btn" id="btn40"></button>
+        <button class="btn" id="btn41"></button>
+        <button class="btn" id="btn42"></button>
+      </div>
+    </div>
+  </div>
+  <div class="controls">
+    <button id="start-btn" class="btn-grid btn">Start</button>
+    <button id="next-btn" class="next-btn btn hide">Next</button>
+  </div>
+  <div class="instruction-container" id="instructionContainer"> 
+    <div data-instruction-message-text></div>
+    <button id="ok-button">Ok</button>
+  </div>
+  <div class="restart-container instruction-container" id="restartContainer"> 
+    <div data-message-text></div>
+    <button id="restart-button">Restart</button>
+  </div>
+  <audio src="SoundEffects/Correct.mp3" id="correct-audio" type="audio/mpeg"></audio>
+  <audio src="SoundEffects/Wrong.mp3" id="wrong-audio" type="audio/mpeg"></audio>
+  <audio src="SoundEffects/GameWinning1.mp3" id="winning-audio" type="audio/mpeg"></audio>
+  <audio src="SoundEffects/GameOver1.mp3" id="gameover-audio" type="audio/mpeg"></audio>
 
 </body>
 </html>
