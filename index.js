@@ -20,7 +20,7 @@ const PlayerModel = mongoose.model("player", PlayerSchema);
 const app = express();
 app.use(cookieParser())
 
-
+app.set("case sensitive routing", false);
 //static content
 app.use(express.static("Static"));
 app.use(express.static("Game"));
@@ -28,7 +28,7 @@ app.use(express.static("Game"));
 //let code read things inside body
 app.use(
     express.urlencoded({
-        extended: true,
+        extended: false,
     })
 );
 
