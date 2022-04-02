@@ -65,6 +65,8 @@ app.get("/login", (req, res) => {
     res.redirect("login.html");
 });
 
+
+
 app.get("/start", (req, res) => {
     res.redirect("Game.html");
 });
